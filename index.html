@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Electron | Text Editor</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="fontAwesome/css/all.css" />
+  </head>
+
+  <body>
+    <!-- Loader -->
+    <div class="loader">
+      <h1>
+        <i class="fas fa-text-width"></i>
+        <!-- <p>Hi</p> -->
+        Electron | Text Editor
+      </h1>
+    </div>
+    <!--  -->
+    <div class="app" id="app">
+      <h2><i class="fas fa-text-width"></i> Electron | Text Editor</h2>
+      <!-- Buuton Container for editing the text -->
+      <div class="button-flex-container">
+        <!-- Inmportant editing buttons -->
+        <div class="div1">
+          <button onclick="runCommand('bold')" title="Bold">
+            <i class="fas fa-bold"></i>
+          </button>
+          <button onclick="runCommand('italic')" title="Italic">
+            <i class="fas fa-italic"></i>
+          </button>
+          <button onclick="runCommand('underline')" title="Underline">
+            <i class="fas fa-underline"></i>
+          </button>
+          <button onclick="runCommand('strikeThrough')" title="StrikeThrough">
+            <i class="fas fa-strikethrough"></i>
+          </button>
+          <button onclick="runCommand('justifyLeft')" title="Align-left">
+            <i class="fas fa-align-left"></i>
+          </button>
+          <button onclick="runCommand('justifyCenter')" title="Align-center">
+            <i class="fas fa-align-center"></i>
+          </button>
+          <button onclick="runCommand('justifyRight')" title="Align-right">
+            <i class="fas fa-align-right"></i>
+          </button>
+          <button onclick="runCommand('justifyFull')" title="Align-justify">
+            <i class="fas fa-align-justify"></i>
+          </button>
+          <button onclick="runCommand('cut')" title="Cut">
+            <i class="fas fa-cut"></i>
+          </button>
+          <button onclick="runCommand('copy')" title="Copy">
+            <i class="fas fa-copy"></i>
+          </button>
+          <button onclick="runCommand('indent')" title="Indent">
+            <i class="fas fa-indent"></i>
+          </button>
+          <button onclick="runCommand('subscript')" title="Subscript">
+            <i class="fas fa-subscript"></i>
+          </button>
+          <button onclick="runCommand('superscript')" title="Superscript">
+            <i class="fas fa-superscript"></i>
+          </button>
+          <button onclick="runCommand('undo')" title="Undo">
+            <i class="fas fa-undo"></i>
+          </button>
+          <button onclick="runCommand('redo')" title="Redo">
+            <i class="fas fa-redo"></i>
+          </button>
+          <button
+            onclick="runCommand('insertUnorderedList')"
+            title="Unordered-list"
+          >
+            <i class="fas fa-list-ul"></i>
+          </button>
+          <button
+            onclick="runCommand('insertOrderedList')"
+            title="Ordered-list"
+          >
+            <i class="fas fa-list-ol"></i>
+          </button>
+          <button onclick="runCommand('insertParagraph')" title="Paragraph">
+            <i class="fas fa-paragraph"></i>
+          </button>
+        </div>
+        <!-- Ends here -->
+        <br />
+        <div class="div2">
+          <!-- Headings -->
+          <select
+            class="select-css"
+            onchange="runCommandWithArg('formatBlock', this.value)"
+          >
+            <option selected>Heading Size</option>
+            <option value="H1" style="font-size: 2rem;"
+              >Extra Large Heading (h1)</option
+            >
+            <option value="H2" style="font-size: 1.4rem;"
+              >Large Heading (h2)</option
+            >
+            <option value="H3" style="font-size: 1.1rem;"
+              >Medium Heading (h3)</option
+            >
+            <option value="H4" style="font-size: 0.9rem;"
+              >Normal Heading (h4)</option
+            >
+            <option value="H5" style="font-size: 0.7rem;"
+              >Small Heading (h5)</option
+            >
+            <option value="H6" style="font-size: 0.5rem;"
+              >Extra Small Heading (h6)</option
+            >
+          </select>
+          <!-- Ends here -->
+          <!-- Link-Unlink-Code -->
+          <button
+            onclick="runCommand('insertHorizontalRule')"
+            title="Horizontal Rule"
+          >
+            <b>HR</b>
+          </button>
+          <button
+            onclick="runCommandWithArg('createLink', prompt('Enter a URL', 'https://'))"
+            title="Link"
+          >
+            <i class="fas fa-link"></i>
+          </button>
+          <button onclick="runCommand('unlink')" title="Unlink">
+            <i class="fas fa-unlink"></i>
+          </button>
+          <!-- Ends here -->
+          <!-- Font Styles -->
+          <select
+            class="select-css"
+            onclick="runCommandWithArg('fontName', this.value)"
+          >
+            <option selected>Font Style</option>
+            <option
+              value="Arial"
+              style="font-family: Arial, Helvetica, sans-serif"
+              >Arial</option
+            >
+            <option
+              value="Cambria"
+              style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
+            >
+              Cambria</option
+            >
+            <option
+              value="Courier"
+              style="font-family: 'Courier New', Courier, monospace "
+              >Courier</option
+            >
+            <option
+              value="Georgia"
+              style="font-family: Georgia, 'Times New Roman', Times, serif"
+              >Georgia</option
+            >
+            <option
+              value="Lucida Sans"
+              style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"
+            >
+              Lucida Sans</option
+            >
+            <option
+              value="Times New Roman"
+              style="font-family: 'Times New Roman', Times, serif"
+              >Times New Roman
+            </option>
+            <option
+              value="Verdana"
+              style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+              >Verdana</option
+            >
+          </select>
+          <!-- Ends here -->
+          <!-- Font Size -->
+          <select
+            class="select-css"
+            onchange="runCommandWithArg('fontSize', this.value)"
+          >
+            <option selected>Font Size</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+          </select>
+          <!-- Ends Here -->
+          <!-- Color -->
+          Text Color :
+          <input
+            type="color"
+            onclick="runCommandWithArg('foreColor', this.value)"
+          />
+          <!-- Ends here -->
+          <!-- Background-Color -->
+          Highlight Text Color :
+          <input
+            type="color"
+            onclick="runCommandWithArg('hiliteColor', this.value)"
+          />
+          <!-- Ends here -->
+          <!-- Select All -->
+          <button onclick="runCommand('selectAll')" title="Select All">
+            <i class="fas fa-check-circle"></i>
+          </button>
+          <!-- Ends here -->
+        </div>
+      </div>
+      <br />
+      <!-- Ends here -->
+
+      <!-- Text Editor goes here -->
+      <iframe name="textEditor" id="textEditor"> </iframe>
+      <!-- Ends here -->
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
